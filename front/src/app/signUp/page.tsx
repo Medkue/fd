@@ -12,6 +12,17 @@ import { CloudOff, CloudQueue } from "@mui/icons-material";
 import { ChangeEvent, useState } from "react";
 import { useAuth } from "../layout";
 import { api } from "../common";
+import { useFormik } from "formik"
+import { string } from "yup";
+import * as yup from "yup";
+
+const validationSchema = yup.object(
+  {
+    name: yup.string().required(),
+    email: yup.string().email().required(),
+
+  }
+)
 
 export default function Home() {
   const {
@@ -26,6 +37,18 @@ export default function Home() {
   } = useAuth();
   const [isAgreed, setIsAgreed] = useState(false);
   const [rePass, setRePass] = useState("");
+
+  const formik = useFormik({
+    initialValues: {
+      name: string,
+      email: string,
+      password: string,
+      location: string,
+    }validationSchema: {
+
+    },
+    onSubmit: (values)
+  });
 
   const rePassHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
