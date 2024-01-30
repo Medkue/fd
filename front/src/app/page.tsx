@@ -5,6 +5,7 @@ import { CustomSearch } from "@/app/components";
 
 import { Stack } from "@mui/material";
 import { ChangeEvent, useState } from "react";
+import { Main } from "./components/MainBanner";
 
 export default function Home() {
   const [value, setValue] = useState("");
@@ -18,11 +19,7 @@ export default function Home() {
   }
   return (
     <>
-      <LogIn />
-      {/* <Stack width={"screen"} height={"screen"} bgcolor={"white"} gap={10}>
-        <CustomInput label={"Password"} type="password" onChange={onChangeHandler} value={value} />
-        <CustomSearch placeHolder={"Search"} onChange={searchOnChangeHandler} />
-      </Stack> */}
+      <Main />
     </>
   );
 }
