@@ -35,18 +35,15 @@ export const CustomInput = (props: TextFieldProps) => {
           {...rest}
           type={type === "password" && isPasswordShown ? "text" : type}
           fullWidth
-          sx={{
-            bgcolor: "#ECEDF0",
-          }}
-          inputProps={{ style: { padding: "14px 16px" } }}
+          inputProps={{ style: { backgroundColor: "#ECEDF0" } }}
           InputProps={{
             endAdornment: type === "password" && (
-              <InputAdornment position="end">
-                <IconButton onClick={handleShowPassword}>
+              <InputAdornment position="end" sx={{ bgcolor: "ECEDF0" }} >
+                <IconButton onClick={handleShowPassword} >
                   {isPasswordShown ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            ),
+            ), style: { backgroundColor: "#ECEDF0" }
           }}
         />
       </Stack>

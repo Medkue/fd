@@ -1,11 +1,8 @@
 "use client";
 
-import { CustomInput, LogIn } from "@/app/components";
-import { CustomSearch } from "@/app/components";
-
-import { Stack } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { Main } from "./components/MainBanner";
+import { MainBanner } from "./components/MainBanner";
+
 
 export default function Home() {
   const [value, setValue] = useState("");
@@ -19,7 +16,7 @@ export default function Home() {
   }
   return (
     <>
-      <Main />
+      <MainBanner />
     </>
   );
 }

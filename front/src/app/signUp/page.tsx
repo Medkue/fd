@@ -27,9 +27,7 @@ const validationSchema = yup.object({
   email: yup.string().email().required(),
   password: yupp
     .string()
-    .password(
-      "Password must contain lowercase and uppercase letter, 1symbol 1 number"
-    )
+    .password()
     .required(),
   location: yup.string().required(),
 });
@@ -87,47 +85,52 @@ export default function Home() {
           Бүртгүүлэх
         </Typography>
         <CustomInput
+
           label={"Нэр"}
           type="text"
           placeholder="Нэрээ оруулна уу"
+          onBlur={formik.handleBlur}
           name="name"
           value={formik.values.name}
           onChange={formik.handleChange}
           error={formik.touched.name && Boolean(formik.errors.name)}
-          helperText={formik.touched.name && Boolean(formik.errors.name)}
+          helperText={formik.touched.name && formik.errors.name}
         />
         <CustomInput
           label={"Имэйл"}
           type="text"
           placeholder="И-мэйл хаягаа оруулна уу"
+          onBlur={formik.handleBlur}
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
           error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && (formik.errors.email)}
         />
         <CustomInput
           label={"Хаяг"}
           type="text"
           placeholder="Та хаягаа оруулна уу"
+          onBlur={formik.handleBlur}
           name="location"
           value={formik.values.location}
           onChange={formik.handleChange}
           error={formik.touched.location && Boolean(formik.errors.location)}
           helperText={
-            formik.touched.location && Boolean(formik.errors.location)
+            formik.touched.location && (formik.errors.location)
           }
         />
         <CustomInput
           label={"Нууц үг"}
           type="password"
           placeholder="Нууц үгээ оруулна уу"
+          onBlur={formik.handleBlur}
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={
-            formik.touched.password && Boolean(formik.errors.password)
+            formik.touched.password && (formik.errors.password)
           }
         />
         <CustomInput

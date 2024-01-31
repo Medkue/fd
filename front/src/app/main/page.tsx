@@ -1,16 +1,16 @@
+"use client"
+import { Stack } from "@mui/material";
 import { MainBanner } from "../components/MainBanner";
 import { MonitorSection } from "../components/MonitorSection";
-export type DataProps = {
-  svg: string,
-  h1: string,
-  p: string,
-}
+import { OnSale } from "../components/OnSale";
+
 
 export default function Home() {
-  return (
-    <>
-      <MainBanner />
-      <MonitorSection />
-    </>
-  );
+  return <Stack>
+    <MainBanner />
+    <MonitorSection />
+    <OnSale />
+  </Stack >
+
+
 }
