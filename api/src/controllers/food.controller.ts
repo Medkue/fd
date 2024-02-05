@@ -1,11 +1,18 @@
 import { RequestHandler } from "express";
 import { FoodModel } from "../models/food.model";
 
-export const getFoodData: RequestHandler = async (_req, res) => {
+export const getFoodData: RequestHandler = async (req, res) => {
+  const { category, discount } = req.body;
+  let data: any = [];
   try {
-    const data = await FoodModel.find({});
-    console.log(data);
-    res.json(data);
+    if (category) {
+      data = await FoodModel.find({ category });
+      res.json(data);
+    } else {
+      res.json({
+        message: "Category data not found",
+      });
+    }
   } catch (error) {
     res.json({ message: error });
   }
@@ -15,8 +22,10 @@ export const addFood: RequestHandler = async (req, res) => {
   try {
     await FoodModel.create({
       name: "hool",
-      image: "hjdsfjkds",
-      price: "chi diilkue",
+      image:
+        "https://www.pixelstalk.net/wp-content/uploads/2016/08/Pictures-HD-Food-Download.jpg",
+      price: "55555",
+      category: "snack",
     });
     res.json({
       message: "kk",

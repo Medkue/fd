@@ -29,7 +29,7 @@ const data = [
 
 export const MonitorSection = () => {
     return (
-        <Stack width="100vw" my={"122px"} >
+        <Stack width="100vw" mt={"122px"} >
             <Container>
                 <Stack direction={"row"} justifyContent={"space-evenly"}>
                     {data.map((item, index) => {

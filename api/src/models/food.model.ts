@@ -13,11 +13,14 @@ const FoodSchema = new Schema({
     type: String,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
   },
   discount: {
     type: Number,
+  },
+  category: {
+    type: String,
   },
 });
 

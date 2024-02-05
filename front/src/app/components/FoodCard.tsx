@@ -10,13 +10,14 @@ export type FoodCardProps = {
 
 export const FoodCard = (props: FoodCardProps) => {
     const { svg, title, price, discount } = props;
+
     return (
         <Stack>
             <Stack gap={"14px"} >
                 <Stack position={"relative"} borderRadius={2} overflow={"hidden"} height={186}>
                     <Image fill src={svg} alt="food image" objectFit="cover " />
                     <Stack
-                        display={discount ? "flex" : "hidden"}
+                        display={discount ? "flex" : "none"}
                         position={"absolute"}
                         top={"5%"}
                         right={"5%"}
@@ -35,9 +36,10 @@ export const FoodCard = (props: FoodCardProps) => {
                     <Typography fontSize={18} fontWeight={600}>
                         {title}
                     </Typography>
-                    <Typography fontSize={18} fontWeight={600} color={"#18BA51"}>
-                        {price}$
+                    <Stack direction={"row"} gap={2}><Typography fontSize={18} fontWeight={600} color={"#18BA51"}>
+                        {discount ? `${Number(price) * (1 - Number(discount) / 100)}$` : `${price}$`}
                     </Typography>
+                        <Typography fontSize={18} sx={{ textDecoration: "line-through" }}> {discount ? price : ""}</Typography></Stack>
                 </Stack>
             </Stack>
         </Stack>

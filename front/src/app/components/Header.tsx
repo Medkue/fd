@@ -1,13 +1,16 @@
 "use client";
 
-import { Container, Stack, Typography } from "@mui/material";
+import { Container, IconButton, Stack, Typography } from "@mui/material";
 import { CustomSearch } from ".";
 import { ChangeEvent, useState } from "react";
-
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const Header = () => {
   const [searchValue, setSearchValue] = useState("");
+  const router = useRouter();
+  const pathName = usePathname();
   const searchOnChangeHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -27,6 +30,7 @@ export const Header = () => {
           direction={"row"}
           justifyContent={"space-between"}
           width={"100%"}
+
         >
           <Stack flexDirection={"row"} gap={1} alignItems={"center"}>
             <Image
@@ -35,31 +39,48 @@ export const Header = () => {
               width={31}
               height={26}
             />
+            <IconButton onClick={() => {
+              router.push("/main")
+            }}>
+              <Typography
+                fontSize={14}
+                fontWeight={700}
+                paddingY={1}
+                paddingX={2}
+                color={pathName.includes("main") ? "#18BA51" : "#000"}
 
-            <Typography
-              fontSize={14}
-              fontWeight={700}
-              paddingY={1}
-              paddingX={2}
-            >
-              НҮҮР
-            </Typography>
-            <Typography
-              fontSize={14}
-              fontWeight={700}
-              paddingY={1}
-              paddingX={2}
-            >
-              ХООЛНЫ ЦЭС
-            </Typography>
-            <Typography
-              fontSize={14}
-              fontWeight={700}
-              paddingY={1}
-              paddingX={2}
-            >
-              ХҮРГЭЛТИЙН БҮС
-            </Typography>
+              >
+                НҮҮР
+              </Typography>
+            </IconButton>
+            <IconButton onClick={() => {
+              router.push("/menu")
+            }}>
+              <Typography
+                fontSize={14}
+                fontWeight={700}
+                paddingY={1}
+                paddingX={2}
+                color={pathName.includes("menu") ? "#18BA51" : "#000"}
+              >
+
+                ХООЛНЫ ЦЭС
+              </Typography>
+
+            </IconButton>
+            <IconButton onClick={() => {
+              router.push("/delivery")
+            }}>
+              <Typography
+                fontSize={14}
+                fontWeight={700}
+                paddingY={1}
+                paddingX={2}
+                color={pathName.includes("delivery") ? "#18BA51" : "#000"}
+              >
+                ХҮРГЭЛТИЙН БҮС
+              </Typography>
+            </IconButton>
           </Stack>
           <Stack flexDirection={"row"} gap={1}>
             <CustomSearch
