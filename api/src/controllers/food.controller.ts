@@ -4,6 +4,7 @@ import { FoodModel } from "../models/food.model";
 export const getFoodData: RequestHandler = async (req, res) => {
   const { category, discount } = req.body;
   let data: any = [];
+  // const splittedCategory = category.trim();
   try {
     if (category) {
       data = await FoodModel.find({ category });
@@ -17,6 +18,8 @@ export const getFoodData: RequestHandler = async (req, res) => {
     res.json({ message: error });
   }
 };
+
+//foods.find({category:{$regex:/^ searchValue/, $options:"i"}}) hoyulangiinh ni search deer tom jijig useggui hainaa
 
 export const addFood: RequestHandler = async (req, res) => {
   try {

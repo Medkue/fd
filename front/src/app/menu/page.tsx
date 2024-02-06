@@ -1,6 +1,10 @@
 "use client"
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { Breakfast } from "../components/Breakfast";
+import { Soup } from "../components/Soup";
+import { MainCourse } from "../components/MainCourse";
+import { Desert } from "../components/Desert";
 
 export default function Menu() {
     const [category, setCategory] = useState("breakfast")
@@ -30,9 +34,10 @@ export default function Menu() {
                             }} sx={{ color: category === "desert" ? "#fff" : "#000" }}>Desert</Button>
                         </Stack>
                     </Stack>
-                    <Stack sx={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }} gap={3} >
-
-                    </Stack>
+                    <Breakfast isShown={category === "breakfast" ? true : false} />
+                    <Soup isShown={category === "soup" ? true : false} />
+                    <MainCourse isShown={category === "main" ? true : false} />
+                    <Desert isShown={category === "desert" ? true : false} />
                 </Stack>
             </Container>
         </Stack>

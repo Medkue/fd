@@ -10,7 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 
 export const Salad = () => {
-    const { data, isLoading, reFetch } = useFetch("http://localhost:3001/food", " Салад ба зууш")
+    const { data, isLoading, reFetch } = useFetch("http://localhost:3001/food", "Салад ба зууш")
     const router = useRouter();
 
     return (
@@ -25,7 +25,7 @@ export const Salad = () => {
                         <Stack direction={"row"} gap={1} alignItems={"center"}>
                             <Typography fontSize={14} color={"#18BA51"}>Бүгдийг харах</Typography>
                             <IconButton onClick={() => {
-                                router.push("/foods/ Салад ба зууш")
+                                router.push("/foods/Салад ба зууш")
 
                             }}>
                                 <ArrowForwardIosIcon sx={{ width: "15px", height: "30px", color: "#18BA51" }} />

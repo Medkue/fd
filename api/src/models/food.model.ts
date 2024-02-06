@@ -20,7 +20,7 @@ const FoodSchema = new Schema({
     type: Number,
   },
   category: {
-    type: String,
+    type: Array,
   },
 });
 
