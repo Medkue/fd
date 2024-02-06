@@ -6,11 +6,16 @@ import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { BasicModal } from "./BasicModal";
 
 export const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
   const pathName = usePathname();
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const searchOnChangeHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -30,7 +35,6 @@ export const Header = () => {
           direction={"row"}
           justifyContent={"space-between"}
           width={"100%"}
-
         >
           <Stack flexDirection={"row"} gap={1} alignItems={"center"}>
             <Image
@@ -39,23 +43,26 @@ export const Header = () => {
               width={31}
               height={26}
             />
-            <IconButton onClick={() => {
-              router.push("/main")
-            }}>
+            <IconButton
+              onClick={() => {
+                router.push("/main");
+              }}
+            >
               <Typography
                 fontSize={14}
                 fontWeight={700}
                 paddingY={1}
                 paddingX={2}
                 color={pathName.includes("main") ? "#18BA51" : "#000"}
-
               >
                 НҮҮР
               </Typography>
             </IconButton>
-            <IconButton onClick={() => {
-              router.push("/menu")
-            }}>
+            <IconButton
+              onClick={() => {
+                router.push("/menu");
+              }}
+            >
               <Typography
                 fontSize={14}
                 fontWeight={700}
@@ -63,14 +70,14 @@ export const Header = () => {
                 paddingX={2}
                 color={pathName.includes("menu") ? "#18BA51" : "#000"}
               >
-
                 ХООЛНЫ ЦЭС
               </Typography>
-
             </IconButton>
-            <IconButton onClick={() => {
-              router.push("/delivery")
-            }}>
+            <IconButton
+              onClick={() => {
+                router.push("/delivery");
+              }}
+            >
               <Typography
                 fontSize={14}
                 fontWeight={700}
@@ -117,10 +124,16 @@ export const Header = () => {
                   width={18}
                   height={18}
                   src="/svg/Vector.svg"
+                  onClick={handleOpen}
                 />
                 <Typography fontSize={14} fontWeight={700}>
                   Нэвтрэх
                 </Typography>
+                <BasicModal
+                  open={open}
+                  handleClose={handleClose}
+                  handleOpen={handleOpen}
+                />
               </Stack>
             </Stack>
           </Stack>
