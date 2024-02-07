@@ -6,13 +6,14 @@ export type FoodCardProps = {
     title: string;
     price: string;
     discount?: string;
+    onclick: () => void
 };
 
 export const FoodCard = (props: FoodCardProps) => {
-    const { svg, title, price, discount } = props;
+    const { svg, title, price, discount, onclick } = props;
 
     return (
-        <Stack>
+        <Stack onClick={onclick}>
             <Stack gap={"14px"} >
                 <Stack position={"relative"} borderRadius={2} overflow={"hidden"} height={186}>
                     <Image fill src={svg} alt="food image" objectFit="cover " />

@@ -6,6 +6,7 @@ import Image from "next/image"
 import { MouseEventHandler, useState } from "react"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { usePathname, useRouter } from "next/navigation";
+import { OrderModal } from "./OrderModal";
 
 type BreakfastProps = {
     // onClick: MouseEventHandler<HTMLButtonElement> | undefined,
@@ -16,6 +17,10 @@ export const Desert = (props: BreakfastProps) => {
     const { data, isLoading, reFetch } = useFetch("http://localhost:3001/food", "Амттан")
     const { isShown } = props;
     const router = useRouter();
+    const [open, setOpen] = useState(false);
+    const toggleModal = () => {
+        setOpen((prev) => !prev)
+    }
 
     return (
         <Stack display={isShown ? "flex" : "none"}>
@@ -23,7 +28,10 @@ export const Desert = (props: BreakfastProps) => {
                 <Stack gap={3}>
                     <Stack sx={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }} gap={3} >
                         {data?.map((item: any, index) => {
-                            return (<FoodCard key={index} svg={item.image} title={item.name} price={item.price} discount={item.discount} />
+                            return (<Stack key={index} >
+                                <FoodCard svg={item.image} title={item.name} price={item.price} discount={item.discount} onclick={toggleModal} />
+                                <OrderModal svg={item.image} title={item.name} price={item.price} ingedrients={item.ingedrient} toggleModal={toggleModal} open={open} />
+                            </Stack>
                             )
                         })}
 

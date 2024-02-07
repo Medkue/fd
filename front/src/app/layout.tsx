@@ -18,6 +18,8 @@ import {
 const inter = Inter({ subsets: ["latin"] });
 
 type AuthContextType = {
+  isLogged: boolean;
+  setIsLogged: Dispatch<SetStateAction<boolean>>;
   name: string;
   setName: Dispatch<SetStateAction<string>>;
   nameHandler: (
@@ -59,6 +61,8 @@ export default function RootLayout({
   const [password, setPassword] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [location, setLocation] = useState("");
+  const [isLogged, setIsLogged] = useState(false);
+  const [basketData, setBasketData] = useState([]);
 
   const nameHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -91,6 +95,8 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <AuthContext.Provider
               value={{
+                isLogged,
+                setIsLogged,
                 email,
                 setEmail,
                 emailHandler,

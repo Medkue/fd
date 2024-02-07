@@ -7,13 +7,20 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { BasicModal } from "./BasicModal";
+import { Drawer } from "./Drawer";
+import { useAuth } from "../layout";
 
-export const Header = () => {
+type HeaderProps = {
+  // toggleDrawer: () => void;
+}
+export const Header = (props: HeaderProps) => {
+  const { isLogged, setIsLogged } = useAuth();
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
   const pathName = usePathname();
 
   const [open, setOpen] = useState(false);
+  const [state, setState] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const searchOnChangeHandler = (
@@ -21,6 +28,10 @@ export const Header = () => {
   ) => {
     setSearchValue(event.target.value);
   };
+
+  const toggleDrawer = () => {
+    setState((prev) => !prev);
+  }
   return (
     <Stack
       width="100vw"
@@ -28,7 +39,7 @@ export const Header = () => {
       bgcolor="white"
       top={0}
       left={0}
-      zIndex={99999}
+      zIndex={10}
     >
       <Container>
         <Stack
@@ -43,58 +54,54 @@ export const Header = () => {
               width={31}
               height={26}
             />
-            <IconButton
+
+            <Typography
+              fontSize={14}
+              fontWeight={700}
+              paddingY={1}
+              paddingX={2}
+              color={pathName.includes("main") ? "#18BA51" : "#000"}
               onClick={() => {
                 router.push("/main");
               }}
             >
-              <Typography
-                fontSize={14}
-                fontWeight={700}
-                paddingY={1}
-                paddingX={2}
-                color={pathName.includes("main") ? "#18BA51" : "#000"}
-              >
-                НҮҮР
-              </Typography>
-            </IconButton>
-            <IconButton
+              НҮҮР
+            </Typography>
+
+            <Typography
+              fontSize={14}
+              fontWeight={700}
+              paddingY={1}
+              paddingX={2}
+              color={pathName.includes("menu") ? "#18BA51" : "#000"}
               onClick={() => {
                 router.push("/menu");
               }}
             >
-              <Typography
-                fontSize={14}
-                fontWeight={700}
-                paddingY={1}
-                paddingX={2}
-                color={pathName.includes("menu") ? "#18BA51" : "#000"}
-              >
-                ХООЛНЫ ЦЭС
-              </Typography>
-            </IconButton>
-            <IconButton
+              ХООЛНЫ ЦЭС
+            </Typography>
+
+
+            <Typography
+              fontSize={14}
+              fontWeight={700}
+              paddingY={1}
+              paddingX={2}
+              color={pathName.includes("delivery") ? "#18BA51" : "#000"}
               onClick={() => {
                 router.push("/delivery");
               }}
             >
-              <Typography
-                fontSize={14}
-                fontWeight={700}
-                paddingY={1}
-                paddingX={2}
-                color={pathName.includes("delivery") ? "#18BA51" : "#000"}
-              >
-                ХҮРГЭЛТИЙН БҮС
-              </Typography>
-            </IconButton>
+              ХҮРГЭЛТИЙН БҮС
+            </Typography>
+
           </Stack>
           <Stack flexDirection={"row"} gap={1}>
             <CustomSearch
               placeHolder={"Search"}
               onChange={searchOnChangeHandler}
             />
-            <Stack flexDirection={"row"} gap={1} paddingY={1} paddingX={2}>
+            <Stack flexDirection={"row"} gap={1} paddingY={1} paddingX={2} >
               <Stack
                 direction={"row"}
                 gap={1}
@@ -107,10 +114,12 @@ export const Header = () => {
                   width={24}
                   height={24}
                   src="/svg/Component 2.svg"
+                  onClick={toggleDrawer}
                 />
-                <Typography fontSize={14} fontWeight={700}>
+                <Typography fontSize={14} fontWeight={700} onClick={toggleDrawer}>
                   Сагс
                 </Typography>
+                <Drawer state={state} toggleDrawer={toggleDrawer} />
               </Stack>
               <Stack
                 direction={"row"}
@@ -126,8 +135,8 @@ export const Header = () => {
                   src="/svg/Vector.svg"
                   onClick={handleOpen}
                 />
-                <Typography fontSize={14} fontWeight={700}>
-                  Нэвтрэх
+                <Typography fontSize={14} fontWeight={700} onClick={handleOpen}>
+                  {isLogged ? "Хэрэглэгч" : "Нэвтрэх"}
                 </Typography>
                 <BasicModal
                   open={open}
