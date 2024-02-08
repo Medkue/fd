@@ -13,7 +13,7 @@ export const OrderModal = (props: OrderModalProps) => {
     console.log(svg);
 
     return (
-        <Modal open={open} onClose={toggleModal} >
+        <Modal open={open} onClose={toggleModal} disableEnforceFocus>
             <Stack width={981} p={3} gap={2} bgcolor={"white"} borderRadius={2} position={"absolute"} top={"30%"} left={"30%"}>
                 <Stack direction={"row"} gap={2}>
                     <Stack flex={1} height={"100%"} position={"relative"} >

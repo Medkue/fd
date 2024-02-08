@@ -5,7 +5,7 @@ import { useAuth } from "@/app/layout";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { api } from "../common";
+import { api } from "../app/common";
 import { log } from "console";
 
 const validationSchema = yup.object({
@@ -14,7 +14,7 @@ const validationSchema = yup.object({
 });
 
 export const LogIn = () => {
-  const { email, emailHandler, password, passwordHandler } = useAuth();
+  const { email, emailHandler, password, passwordHandler, setIsLogged } = useAuth();
   const router = useRouter();
 
   const formik = useFormik({
@@ -34,6 +34,8 @@ export const LogIn = () => {
         if (!token) return alert("No token found")
 
         localStorage.setItem("token", token);
+
+        setIsLogged(true)
 
         router.push("/")
 

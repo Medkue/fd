@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import { MainBanner } from "./components/MainBanner";
+import { MainBanner } from "../components/MainBanner";
 
 
 export default function Home() {

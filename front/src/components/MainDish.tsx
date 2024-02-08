@@ -1,6 +1,6 @@
 "use client";
 import { Container, IconButton, Stack, Typography } from "@mui/material"
-import { useFetch } from "../Hooks/useFetch"
+import { useFetch } from "../app/Hooks/useFetch"
 import { FoodCard } from "./FoodCard"
 import Image from "next/image"
 import { useState } from "react"
@@ -9,8 +9,8 @@ import { usePathname, useRouter } from "next/navigation";
 
 
 
-export const OnSale = () => {
-    const { data, isLoading, reFetch } = useFetch("http://localhost:3001/food", "Хямдралтай");
+export const MainDish = () => {
+    const { data, isLoading, reFetch } = useFetch("http://localhost:3001/food", "Үндсэн хоол");
     const router = useRouter();
 
     return (
@@ -20,12 +20,12 @@ export const OnSale = () => {
                     <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} >
                         <Stack direction={"row"} p={2} gap={2} alignItems={"center"}>
                             <Image src="/svg/Star 1.svg" width={24} height={24} alt="star image" />
-                            <Typography fontSize={22} fontWeight={700}>Хямдралтай</Typography>
+                            <Typography fontSize={22} fontWeight={700}>Үндсэн хоол</Typography>
                         </Stack>
                         <Stack direction={"row"} gap={1} alignItems={"center"}>
                             <Typography fontSize={14} color={"#18BA51"}>Бүгдийг харах</Typography>
                             <IconButton onClick={() => {
-                                router.push("foods/Хямдралтай")
+                                router.push(`foods/Үндсэн хоол`)
 
                             }}>
                                 <ArrowForwardIosIcon sx={{ width: "15px", height: "30px", color: "#18BA51" }} />

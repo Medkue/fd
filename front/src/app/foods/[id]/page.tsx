@@ -1,11 +1,13 @@
 'use client'
 
 import { Container, Stack, Typography } from "@mui/material";
-import { MainDish } from "../../components/MainDish";
+import { MainDish } from "../../../components/MainDish";
 import { useParams, usePathname } from 'next/navigation'
 import { useFetch } from "@/app/Hooks/useFetch";
-import { FoodCard } from "@/app/components/FoodCard";
+import { FoodCard } from "@/components/FoodCard";
 import { string } from "yup";
+import { useState } from "react";
+import { OrderModal } from "@/components/OrderModal";
 
 const labelMap = {
     "foods/map": "G"
@@ -16,6 +18,10 @@ export default function Home(props: any) {
     const { id } = useParams();
     const pathName = usePathname();
     const decodedId = decodeURIComponent(id);
+    const [open, setOpen] = useState(false);
+    const toggleModal = () => {
+        setOpen((prev) => !prev)
+    }
 
     const { data, isLoading, reFetch } = useFetch("http://localhost:3001/food", decodedId);
 
@@ -30,8 +36,11 @@ export default function Home(props: any) {
                 < Stack />
                 <Stack sx={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }} gap={3} >
                     {data?.map((item: any, index) => {
-                        return (
-                            <FoodCard key={index} svg={item.image} title={item.name} price={item.price} discount={item.discount} />)
+                        return (<Stack key={index} >
+                            <FoodCard svg={item.image} title={item.name} price={item.price} discount={item.discount} onclick={toggleModal} />
+                            <OrderModal svg={item.image} title={item.name} price={item.price} ingedrients={item.ingedrient} toggleModal={toggleModal} open={open} />
+                        </Stack>
+                        )
                     })}
                 </Stack>
             </Container>

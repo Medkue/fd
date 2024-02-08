@@ -4,7 +4,7 @@ import { CustomInput } from "."
 import { useAuth } from "@/app/layout"
 
 export const LogInModal = () => {
-    const { email, emailHandler, password, passwordHandler } = useAuth();
+    const { email, emailHandler, password, passwordHandler, isLogged, setIsLogged } = useAuth();
     return (
         <Container sx={{ display: "flex", width: "100vw", height: "100vh", justifyContent: "center", alignItems: "center", bgcolor: "black", padding: "32px" }} >
             <Stack alignItems="center" justifyContent="center" height="549px" width={"448px"} borderRadius={4} bgcolor={"white"} sx={{}} >

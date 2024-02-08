@@ -6,7 +6,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CustomInput } from "../components";
+import { CustomInput } from "../../components";
 import Image from "next/image";
 import { CloudOff, CloudQueue } from "@mui/icons-material";
 import { useState } from "react";

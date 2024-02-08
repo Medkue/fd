@@ -8,13 +8,13 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { BasicModal } from "./BasicModal";
 import { Drawer } from "./Drawer";
-import { useAuth } from "../layout";
+import { useAuth } from "../app/layout";
 
 type HeaderProps = {
   // toggleDrawer: () => void;
 }
 export const Header = (props: HeaderProps) => {
-  const { isLogged, setIsLogged } = useAuth();
+  // const { isLogged, setIsLogged } = useAuth();
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
   const pathName = usePathname();
@@ -64,6 +64,7 @@ export const Header = (props: HeaderProps) => {
               onClick={() => {
                 router.push("/main");
               }}
+              sx={{ cursor: "pointer" }}
             >
               НҮҮР
             </Typography>
@@ -77,6 +78,7 @@ export const Header = (props: HeaderProps) => {
               onClick={() => {
                 router.push("/menu");
               }}
+              sx={{ cursor: "pointer" }}
             >
               ХООЛНЫ ЦЭС
             </Typography>
@@ -91,6 +93,7 @@ export const Header = (props: HeaderProps) => {
               onClick={() => {
                 router.push("/delivery");
               }}
+              sx={{ cursor: "pointer" }}
             >
               ХҮРГЭЛТИЙН БҮС
             </Typography>
@@ -116,7 +119,7 @@ export const Header = (props: HeaderProps) => {
                   src="/svg/Component 2.svg"
                   onClick={toggleDrawer}
                 />
-                <Typography fontSize={14} fontWeight={700} onClick={toggleDrawer}>
+                <Typography fontSize={14} fontWeight={700} onClick={toggleDrawer} sx={{ cursor: "pointer" }}>
                   Сагс
                 </Typography>
                 <Drawer state={state} toggleDrawer={toggleDrawer} />
@@ -135,8 +138,8 @@ export const Header = (props: HeaderProps) => {
                   src="/svg/Vector.svg"
                   onClick={handleOpen}
                 />
-                <Typography fontSize={14} fontWeight={700} onClick={handleOpen}>
-                  {isLogged ? "Хэрэглэгч" : "Нэвтрэх"}
+                <Typography fontSize={14} fontWeight={700} onClick={handleOpen} sx={{ cursor: "pointer" }}>
+                  {/* {isLogged ? "Хэрэглэгч" : "Нэвтрэх"} */}
                 </Typography>
                 <BasicModal
                   open={open}

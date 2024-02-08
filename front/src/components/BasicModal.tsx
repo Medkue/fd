@@ -3,10 +3,10 @@ import { Button, Container, Modal, Stack, Typography } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { CustomInput } from ".";
 import { useFormik } from "formik";
-import { api } from "../common";
+import { api } from "../app/common";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
-import { useAuth } from "../layout";
+import { useAuth } from "../app/layout";
 
 type BasicModalProps = {
   open: boolean;
@@ -21,7 +21,7 @@ const validationSchema = yup.object({
 });
 
 export const BasicModal = (props: BasicModalProps) => {
-  const { setIsLogged } = useAuth();
+  // const { setIsLogged } = useAuth();
   const { open, handleClose, handleOpen } = props;
   const router = useRouter();
 
