@@ -1,20 +1,20 @@
 "use client";
 
 import { Container, IconButton, Stack, Typography } from "@mui/material";
-import { CustomSearch } from ".";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { BasicModal } from "./BasicModal";
-import { Drawer } from "./Drawer";
-import { useAuth } from "../app/layout";
+import { BasicModal } from "../modals/BasicModal";
+import { Drawer } from "../mainPageComps/Drawer";
+import { useAuth } from "../providers/AuthProvider";
+import { CustomSearch } from "..";
 
 type HeaderProps = {
   // toggleDrawer: () => void;
 }
 export const Header = (props: HeaderProps) => {
-  // const { isLogged, setIsLogged } = useAuth();
+  const { isLogged, setIsLogged } = useAuth();
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
   const pathName = usePathname();
@@ -32,6 +32,7 @@ export const Header = (props: HeaderProps) => {
   const toggleDrawer = () => {
     setState((prev) => !prev);
   }
+
   return (
     <Stack
       width="100vw"
@@ -139,7 +140,7 @@ export const Header = (props: HeaderProps) => {
                   onClick={handleOpen}
                 />
                 <Typography fontSize={14} fontWeight={700} onClick={handleOpen} sx={{ cursor: "pointer" }}>
-                  {/* {isLogged ? "Хэрэглэгч" : "Нэвтрэх"} */}
+                  {isLogged ? "Хэрэглэгч" : "Нэвтрэх"}
                 </Typography>
                 <BasicModal
                   open={open}

@@ -1,5 +1,5 @@
 import { Container, Stack } from "@mui/material"
-import { MonitorCard } from "./MonitorCard"
+import { MonitorCard } from "../cards/MonitorCard"
 
 
 

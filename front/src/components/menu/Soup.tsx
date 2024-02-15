@@ -1,20 +1,20 @@
 "use client";
 import { Button, Container, IconButton, Stack, Typography } from "@mui/material"
-import { useFetch } from "../app/Hooks/useFetch"
-import { FoodCard } from "./FoodCard"
+import { useFetch } from "../../app/Hooks/useFetch"
+import { FoodCard } from "../cards/FoodCard"
 import Image from "next/image"
 import { MouseEventHandler, useState } from "react"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { usePathname, useRouter } from "next/navigation";
-import { OrderModal } from "./OrderModal";
+import { OrderModal } from "../modals/OrderModal";
 
 type BreakfastProps = {
     // onClick: MouseEventHandler<HTMLButtonElement> | undefined,
     isShown: boolean
 }
 
-export const Desert = (props: BreakfastProps) => {
-    const { data, isLoading, reFetch } = useFetch("http://localhost:3001/food", "Амттан")
+export const Soup = (props: BreakfastProps) => {
+    const { data, isLoading, reFetch } = useFetch("http://localhost:3001/food", "soup")
     const { isShown } = props;
     const router = useRouter();
     const [open, setOpen] = useState(false);

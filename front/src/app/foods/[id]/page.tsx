@@ -1,13 +1,13 @@
 'use client'
 
 import { Container, Stack, Typography } from "@mui/material";
-import { MainDish } from "../../../components/MainDish";
+import { MainDish } from "../../../components/mainPageComps/MainDish";
 import { useParams, usePathname } from 'next/navigation'
 import { useFetch } from "@/app/Hooks/useFetch";
-import { FoodCard } from "@/components/FoodCard";
+import { FoodCard } from "@/components/cards/FoodCard";
 import { string } from "yup";
 import { useState } from "react";
-import { OrderModal } from "@/components/OrderModal";
+import { OrderModal } from "@/components/modals/OrderModal";
 
 const labelMap = {
     "foods/map": "G"

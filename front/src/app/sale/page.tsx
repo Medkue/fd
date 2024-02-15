@@ -1,5 +1,5 @@
 import { Container, Stack, Typography } from "@mui/material";
-import { OnSale } from "../../components/OnSale";
+import { OnSale } from "../../components/mainPageComps/OnSale";
 
 export default function Home() {
     return (

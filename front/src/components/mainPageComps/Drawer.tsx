@@ -1,7 +1,7 @@
 import { Stack, SwipeableDrawer, Typography } from "@mui/material"
 import Image from "next/image";
 import { ReactEventHandler } from "react";
-import { BasketOrder } from "./BasketOrder";
+import { BasketOrder } from "../order/BasketOrder";
 type DrawerProps = {
     state: boolean;
     toggleDrawer: () => void

@@ -1,12 +1,14 @@
 "use client";
 import { Button, Container, Stack, Typography } from "@mui/material";
-import { CustomInput } from ".";
-import { useAuth } from "@/app/layout";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { api } from "../app/common";
 import { log } from "console";
+import { useAuth } from "./providers/AuthProvider";
+import { CustomInput } from "./customUsage/CustomInput";
+
+
 
 const validationSchema = yup.object({
   email: yup.string().email(),
@@ -14,7 +16,7 @@ const validationSchema = yup.object({
 });
 
 export const LogIn = () => {
-  const { email, emailHandler, password, passwordHandler, setIsLogged } = useAuth();
+  const { signUp, setIsLogged } = useAuth();
   const router = useRouter();
 
   const formik = useFormik({
@@ -22,26 +24,8 @@ export const LogIn = () => {
       email: "",
       password: "",
     }, validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      try {
-        const res = await api.post("/logIn", {
-          values
-        })
-
-        const { token } = res.data;
-
-
-        if (!token) return alert("No token found")
-
-        localStorage.setItem("token", token);
-
-        setIsLogged(true)
-
-        router.push("/")
-
-      } catch (error: any) {
-        alert(error.response.data.message)
-      }
+    onSubmit: (values) => {
+      signUp(values)
     }
   });
   return (

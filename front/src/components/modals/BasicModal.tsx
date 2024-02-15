@@ -1,12 +1,12 @@
 "use client"
 import { Button, Container, Modal, Stack, Typography } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { CustomInput } from ".";
 import { useFormik } from "formik";
-import { api } from "../app/common";
+import { api } from "../../app/common";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
-import { useAuth } from "../app/layout";
+import { CustomInput } from "../customUsage/CustomInput";
+
 
 type BasicModalProps = {
   open: boolean;
@@ -46,7 +46,7 @@ export const BasicModal = (props: BasicModalProps) => {
         localStorage.setItem("token", token);
 
 
-        setIsLogged(true)
+        // setIsLogged(true)
         handleClose();
 
       } catch (error: any) {

@@ -1,5 +1,5 @@
 import { Container, Stack, Typography } from "@mui/material";
-import { MainDish } from "../../components/MainDish";
+import { MainDish } from "../../components/mainPageComps/MainDish";
 
 export default function Home() {
     return (

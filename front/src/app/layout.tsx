@@ -17,12 +17,22 @@ import {
 
 const inter = Inter({ subsets: ["latin"] });
 
+type AuthContextType = {
+  isLogged: boolean;
+  setIsLogged: Dispatch<SetStateAction<boolean>>;
+
+};
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+const useAuth = () => useContext(AuthContext);
+
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
 
 
   // const [isLogged, setIsLogged] = useState(false);

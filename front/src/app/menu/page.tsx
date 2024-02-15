@@ -1,10 +1,10 @@
 "use client"
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { Breakfast } from "../../components/Breakfast";
-import { Soup } from "../../components/Soup";
-import { MainCourse } from "../../components/MainCourse";
-import { Desert } from "../../components/Desert";
+import { Breakfast } from "../../components/menu/Breakfast";
+import { Soup } from "../../components/menu/Soup";
+import { MainCourse } from "../../components/menu/MainCourse";
+import { Desert } from "../../components/menu/Desert";
 
 export default function Menu() {
     const [category, setCategory] = useState("breakfast")
