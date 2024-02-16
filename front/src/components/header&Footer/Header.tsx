@@ -18,7 +18,6 @@ export const Header = (props: HeaderProps) => {
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
   const pathName = usePathname();
-
   const [open, setOpen] = useState(false);
   const [state, setState] = useState(false);
   const handleOpen = () => setOpen(true);

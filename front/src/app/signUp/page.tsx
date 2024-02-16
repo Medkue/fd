@@ -6,7 +6,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CustomInput } from "../../components";
+
 import Image from "next/image";
 import { CloudOff, CloudQueue } from "@mui/icons-material";
 import { useState } from "react";
@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import YupPassword from "yup-password";
 import { useRouter } from "next/navigation";
+import { CustomInput } from "@/components/customUsage/CustomInput";
 
 YupPassword(yup);
 
@@ -53,7 +54,7 @@ export default function Home() {
 
         if (res.data.status === "unsuccessful") return alert(res.data.message);
 
-        router.push("/");
+        router.push("/logIn");
 
         alert(res.data.message);
       } catch (error) {

@@ -6,6 +6,7 @@ import { api } from "../../app/common";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
 import { CustomInput } from "../customUsage/CustomInput";
+import { useAuth } from "../providers/AuthProvider";
 
 
 type BasicModalProps = {
@@ -21,7 +22,7 @@ const validationSchema = yup.object({
 });
 
 export const BasicModal = (props: BasicModalProps) => {
-  // const { setIsLogged } = useAuth();
+  const { setCheck } = useAuth();
   const { open, handleClose, handleOpen } = props;
   const router = useRouter();
 
@@ -35,7 +36,8 @@ export const BasicModal = (props: BasicModalProps) => {
     onSubmit: async (values) => {
       try {
         const res = await api.post("/logIn", {
-          values
+          email: values.email,
+          password: values.password,
         })
 
         const { token } = res.data;
@@ -46,7 +48,10 @@ export const BasicModal = (props: BasicModalProps) => {
         localStorage.setItem("token", token);
 
 
-        // setIsLogged(true)
+
+        setCheck((prev) => !prev)
+
+
         handleClose();
 
       } catch (error: any) {

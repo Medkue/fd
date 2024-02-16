@@ -8,9 +8,15 @@ import { Dispatch, SetStateAction, createContext, useContext, useEffect, useStat
 type AuthContextType = {
     isLogged: boolean;
     setIsLogged: Dispatch<SetStateAction<boolean>>;
-    signUp: (values: any) => void
+    signUp: (values: ValuesType) => Promise<void | JSX.Element>;
+    setCheck: Dispatch<SetStateAction<boolean>>
 
 };
+
+export type ValuesType = {
+    email: string;
+    password: string;
+}
 
 type AuthProviderType = {
     children: React.ReactNode
@@ -20,12 +26,28 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
 export const AuthProvider = ({ children }: AuthProviderType) => {
     const [isLogged, setIsLogged] = useState(false);
+    const [checkToken, setCheck] = useState(false)
     const router = useRouter();
 
-    const signUp = async (values: any) => {
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        if (token) {
+            setIsLogged(true)
+        } else {
+            setIsLogged(false)
+        }
+
+        console.log(isLogged)
+    }, [checkToken])
+
+    const signUp = async (values: ValuesType) => {
+
+        console.log(values)
         try {
             const res = await api.post("/logIn", {
-                values
+                email: values.email,
+                password: values.password,
             })
 
             const { token } = res.data;
@@ -37,14 +59,16 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
 
             setIsLogged(true);
 
-            router.push("/")
+
+
+            router.push("/main")
 
         } catch (error: any) {
             alert(error.response.data.message)
         }
 
 
-        return <AuthContext.Provider value={{ isLogged, setIsLogged, signUp }}>{children}</AuthContext.Provider>
+        return <AuthContext.Provider value={{ isLogged, setIsLogged, signUp, setCheck }}>{children}</AuthContext.Provider>
 
     }
 }

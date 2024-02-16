@@ -32,11 +32,9 @@ export const signUp: RequestHandler = async (req, res) => {
 };
 
 export const logIn: RequestHandler = async (req, res) => {
-  const { email, password } = req.body.values;
+  const { email, password } = req.body;
 
   const user = await UserModel.findOne({ email: email });
-
-  console.log(user);
 
   if (!user) {
     return res.status(401).json({
