@@ -8,8 +8,6 @@ import { log } from "console";
 import { useAuth } from "./providers/AuthProvider";
 import { CustomInput } from "./customUsage/CustomInput";
 
-
-
 const validationSchema = yup.object({
   email: yup.string().email(),
   password: yup.string(),
@@ -23,10 +21,11 @@ export const LogIn = () => {
     initialValues: {
       email: "",
       password: "",
-    }, validationSchema: validationSchema,
+    },
+    validationSchema: validationSchema,
     onSubmit: (values) => {
-      signUp(values)
-    }
+      signUp(values);
+    },
   });
   return (
     <Container sx={{ width: "100vw" }}>
@@ -47,9 +46,7 @@ export const LogIn = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
             error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={
-              formik.touched.email && Boolean(formik.errors.email)
-            }
+            helperText={formik.touched.email && formik.errors.email}
           />
           <CustomInput
             label={"Нууц үг"}
@@ -58,9 +55,7 @@ export const LogIn = () => {
             onChange={formik.handleChange}
             value={formik.values.password}
             error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={
-              formik.touched.password && Boolean(formik.errors.password)
-            }
+            helperText={formik.touched.password && formik.errors.password}
           />
           <Typography
             alignSelf={"end"}
