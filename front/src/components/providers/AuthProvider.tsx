@@ -2,7 +2,7 @@
 
 import { api } from "@/app/common";
 import { useFormik } from "formik";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 
 type AuthContextType = {
@@ -19,7 +19,7 @@ export type ValuesType = {
 }
 
 type AuthProviderType = {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
     const [checkToken, setCheck] = useState(false)
     const router = useRouter();
 
-
     useEffect(() => {
         const token = localStorage.getItem("token")
         if (token) {
@@ -37,13 +36,10 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
         } else {
             setIsLogged(false)
         }
-
-        console.log(isLogged)
     }, [checkToken])
 
     const signUp = async (values: ValuesType) => {
 
-        console.log(values)
         try {
             const res = await api.post("/logIn", {
                 email: values.email,
@@ -66,11 +62,8 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
         } catch (error: any) {
             alert(error.response.data.message)
         }
-
-
-        return <AuthContext.Provider value={{ isLogged, setIsLogged, signUp, setCheck }}>{children}</AuthContext.Provider>
-
     }
+    return <AuthContext.Provider value={{ isLogged, setIsLogged, signUp, setCheck }}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = () => {
