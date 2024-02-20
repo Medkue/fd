@@ -2,17 +2,35 @@
 import { CustomInput } from "@/components/customUsage/CustomInput";
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
 import * as yup from "yup";
+import { api } from "../common";
+import { useOtp } from "@/components/providers/OtpProvider";
 
 const validationSchema = yup.object({
   email: yup.string().email(),
 });
 
 export default function Home() {
+  const { email, otp, sendEmail, setEmail } = useOtp();
+  const router = useRouter();
   const formik = useFormik({
     initialValues: { email: "" },
     validationSchema: validationSchema,
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {
+      try {
+        const res = await api.post("/email/send", {
+          email: values.email
+        })
+
+
+
+        router.push("/forgot-pass-2")
+      } catch (error) {
+        console.log(error);
+      }
+
+    },
   });
   return (
     <Stack mt={10}>
@@ -29,18 +47,23 @@ export default function Home() {
               type="text"
               label="Имэйл"
               placeholder="Имэйл хаягаа оруулна уу"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              onChange={(event) => {
+                event.preventDefault();
+                setEmail(event.target.value);
+              }}
+              value={email}
+              // error={email && (email)}
+              helperText={email && email}
               onBlur={formik.handleBlur}
             />
             <Button
               variant="contained"
               disableElevation
-              disabled={!formik.values.email}
+              disabled={!email}
               sx={{ width: "388px", height: "48px" }}
-              onClick={() => {}}
+              onClick={() => {
+                sendEmail(email)
+              }}
             >
               Үргэлжлүүлэх
             </Button>

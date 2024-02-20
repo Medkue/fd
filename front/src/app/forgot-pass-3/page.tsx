@@ -1,18 +1,35 @@
 "use client";
 import { CustomInput } from "@/components/customUsage/CustomInput";
+import { useOtp } from "@/components/providers/OtpProvider";
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
+import { api } from "../common";
 
 export default function Home() {
+  const { email } = useOtp();
   const router = useRouter();
 
   const formik = useFormik({
     initialValues: { password: "", repassword: "" },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       if (values.password !== values.repassword) {
         alert("repass must match with password");
+      } else {
+        try {
+          const res = await api.post("email/password", {
+            email: email,
+            password: values.password
+          })
+          if (res.data.message === "Success")
+            alert("User password successfully updated")
+
+        } catch (error) {
+          console.log(error);
+
+        }
+
       }
     },
   });

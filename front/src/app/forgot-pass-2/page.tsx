@@ -4,13 +4,23 @@ import { Button, Container, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
+import { api } from "../common";
+import { useOtp } from "@/components/providers/OtpProvider";
 
 export default function Home() {
+  const { email, otp, sendOtp, setOtp } = useOtp();
   const router = useRouter();
 
   const formik = useFormik({
     initialValues: { code: "" },
     onSubmit: () => {
+      try {
+        const res = api.post("/email/get", {
+
+        })
+      } catch (error) {
+
+      }
       router.push("/forgot-pass-3");
     },
   });
@@ -29,7 +39,7 @@ export default function Home() {
                 Таны
               </Typography>
               <Typography fontWeight={500} color={"#18BA51"}>
-                example@gmail.com
+                {email}
               </Typography>
               <Typography fontWeight={500} color={"#695C08"}>
                 хаяг руу сэргээх код илгээх болно.
@@ -40,19 +50,24 @@ export default function Home() {
               type="password"
               label="Нууц үг сэргээх код"
               placeholder="******"
-              onChange={formik.handleChange}
-              value={formik.values.code}
-              error={formik.touched.code && Boolean(formik.errors.code)}
-              helperText={formik.touched.code && formik.errors.code}
+              onChange={(event) => {
+                event.preventDefault();
+                setOtp(event.target.value);
+              }}
+              value={otp}
+              // error={formik.tou && Boolean(formik.errors.code)}
+              // helperText={formik.touched.code && formik.errors.code}
               onBlur={formik.handleBlur}
             />
             <Button
               variant="contained"
               disableElevation
-              disabled={!formik.values.code}
+              disabled={!otp}
               sx={{ width: "388px", height: "48px" }}
               onClick={() => {
-                formik.handleSubmit();
+                sendOtp(email, otp)
+                console.log(otp, "otp");
+
               }}
             >
               Үргэлжлүүлэх
