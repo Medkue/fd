@@ -8,7 +8,6 @@ export const useFetch = <T>(url: string, category: any) => {
   const fetchData = async () => {
     try {
       const res = await api.post(url, { category });
-      console.log(res.data);
 
       setData(res.data);
     } catch (error) {

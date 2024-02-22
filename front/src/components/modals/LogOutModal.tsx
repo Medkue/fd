@@ -1,4 +1,5 @@
 import { Modal, Stack, Typography } from "@mui/material"
+import { useAuth } from "../providers/AuthProvider";
 
 
 type LogOutModalProps = {
@@ -7,6 +8,7 @@ type LogOutModalProps = {
 }
 
 export const LogOutModal = (props: LogOutModalProps) => {
+    const { setIsLogged, setCheck } = useAuth();
     const { toggleModal, open } = props
     return (
         // <Modal open={open} onClose={toggleModal} disableEnforceFocus>
@@ -31,8 +33,12 @@ export const LogOutModal = (props: LogOutModalProps) => {
                             итгэлтэй байна уу?</Typography>
                     </Stack>
                     <Stack width={"100%"} direction={"row"} height={61} >
-                        <Stack flex={1} alignItems={"center"} bgcolor={"#18BA51"} justifyContent={"center"}>
-                            <Typography fontSize={20} fontWeight={600} color={"white"}>Тийм </Typography>
+                        <Stack flex={1} alignItems={"center"} bgcolor={"#18BA51"} justifyContent={"center"} onClick={() => {
+                            localStorage.removeItem("token");
+                            setCheck((prev) => !prev);
+
+                        }}>
+                            <Typography fontSize={20} fontWeight={600} color={"white"} >Тийм </Typography>
                         </Stack>
                         <Stack flex={1} alignItems={"center"} bgcolor={"#18BA5133"} justifyContent={"center"}>
                             <Typography fontSize={20} fontWeight={600}>Үгүй </Typography>

@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import * as yup from "yup";
 import { CustomInput } from "../customUsage/CustomInput";
 import { useAuth } from "../providers/AuthProvider";
+import { useUser } from "../providers/UserProvider";
+import { Email } from "@mui/icons-material";
 
 
 type BasicModalProps = {
@@ -22,6 +24,8 @@ const validationSchema = yup.object({
 });
 
 export const BasicModal = (props: BasicModalProps) => {
+  const { setIsLogged } = useAuth();
+  const { getUser } = useUser();
   const { setCheck } = useAuth();
   const { open, handleClose, handleOpen } = props;
   const router = useRouter();
@@ -35,6 +39,7 @@ export const BasicModal = (props: BasicModalProps) => {
     }, validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
+
         const res = await api.post("/logIn", {
           email: values.email,
           password: values.password,
@@ -42,15 +47,10 @@ export const BasicModal = (props: BasicModalProps) => {
 
         const { token } = res.data;
 
-
-        if (!token) return alert("No token found")
-
         localStorage.setItem("token", token);
 
-
-
         setCheck((prev) => !prev)
-
+        setIsLogged(true);
 
         handleClose();
 
@@ -101,6 +101,7 @@ export const BasicModal = (props: BasicModalProps) => {
             marginTop={-1}
             fontSize={14}
             fontWeight={400}
+            onClick={() => { router.push("/forgot-pass-1") }}
           >
             Нууц үг сэргээх
           </Typography>
@@ -128,6 +129,6 @@ export const BasicModal = (props: BasicModalProps) => {
         </Stack>
       </Stack>
       {/* </Stack> */}
-    </Modal>
+    </Modal >
   );
 };

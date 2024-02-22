@@ -17,6 +17,7 @@ import { AuthProvider } from "@/components/providers/AuthProvider";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { OtpProvider } from "@/components/providers/OtpProvider";
+import { UserProvider } from "@/components/providers/UserProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,13 +42,17 @@ export default function RootLayout({
               pauseOnHover
               theme="light"
               transition:Bounce> */}
+
             <AuthProvider>
               <OtpProvider>
-                <Header />
-                {children}
-                <Footer />
+                <UserProvider>
+                  <Header />
+                  {children}
+                  <Footer />
+                </UserProvider>
               </OtpProvider>
             </AuthProvider>
+
             {/* </ToastContainer> */}
             <CssBaseline />
           </ThemeProvider>

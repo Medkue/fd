@@ -9,11 +9,13 @@ import { BasicModal } from "../modals/BasicModal";
 import { Drawer } from "../mainPageComps/Drawer";
 import { useAuth } from "../providers/AuthProvider";
 import { CustomSearch } from "..";
+import { useUser } from "../providers/UserProvider";
 
 type HeaderProps = {
   // toggleDrawer: () => void;
 }
 export const Header = (props: HeaderProps) => {
+  const { userName } = useUser();
   const { isLogged, setIsLogged } = useAuth();
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
@@ -31,6 +33,8 @@ export const Header = (props: HeaderProps) => {
   const toggleDrawer = () => {
     setState((prev) => !prev);
   }
+  console.log(userName);
+
 
   return (
     <Stack
@@ -138,8 +142,14 @@ export const Header = (props: HeaderProps) => {
                   src="/svg/Vector.svg"
                   onClick={handleOpen}
                 />
-                <Typography fontSize={14} fontWeight={700} onClick={handleOpen} sx={{ cursor: "pointer" }}>
-                  {isLogged ? "Хэрэглэгч" : "Нэвтрэх"}
+                <Typography fontSize={14} fontWeight={700} onClick={() => {
+                  if (userName) {
+                    router.push("/user")
+                  } else {
+                    handleOpen()
+                  }
+                }} sx={{ cursor: "pointer" }}>
+                  {isLogged ? userName : "Нэвтрэх"}
                 </Typography>
                 <BasicModal
                   open={open}

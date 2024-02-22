@@ -10,7 +10,6 @@ type OrderModalProps = {
 }
 export const OrderModal = (props: OrderModalProps) => {
     const { toggleModal, open, svg, title, price, ingedrients } = props;
-    console.log(svg);
 
     return (
         <Modal open={open} onClose={toggleModal} disableEnforceFocus>

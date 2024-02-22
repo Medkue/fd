@@ -20,6 +20,7 @@ export const signUp: RequestHandler = async (req, res) => {
       email,
       password,
       location,
+      role: "user",
     });
 
     res.json({

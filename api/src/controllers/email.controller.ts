@@ -83,7 +83,7 @@ export const sendOtp: RequestHandler = async (req, res) => {
 export const changePassword: RequestHandler = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = UserModel.findOne({ email: email });
+  const user = await UserModel.findOne({ email: email });
   console.log(email, password);
 
   // console.log(user, "user");

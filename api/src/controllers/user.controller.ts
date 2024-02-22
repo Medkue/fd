@@ -1,10 +1,20 @@
 import { RequestHandler } from "express";
 import { UserModel } from "../models";
+import Jwt, { JwtPayload } from "jsonwebtoken";
 
 export const getUser: RequestHandler = async (req, res) => {
-  const { email } = req.body;
+  const { authorization } = req.headers;
 
-  const user = await UserModel.find({ email });
+  if (!authorization) {
+    throw new Error("");
+  }
+
+  const { email: userEmail } = Jwt.verify(
+    authorization,
+    "secret-key"
+  ) as JwtPayload;
+
+  const user = await UserModel.findOne({ email: userEmail });
 
   if (!user)
     return res.json({
