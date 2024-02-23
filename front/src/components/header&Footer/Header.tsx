@@ -6,16 +6,16 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { BasicModal } from "../modals/BasicModal";
-import { Drawer } from "../mainPageComps/Drawer";
 import { useAuth } from "../providers/AuthProvider";
 import { CustomSearch } from "..";
 import { useUser } from "../providers/UserProvider";
+import { Drawer } from "../orderComps/Drawer";
 
 type HeaderProps = {
   // toggleDrawer: () => void;
 }
 export const Header = (props: HeaderProps) => {
-  const { userName } = useUser();
+  const { userName, isAdmin } = useUser();
   const { isLogged, setIsLogged } = useAuth();
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
@@ -101,6 +101,20 @@ export const Header = (props: HeaderProps) => {
             >
               ХҮРГЭЛТИЙН БҮС
             </Typography>
+            <Typography
+              display={isAdmin ? "flex" : "none"}
+              fontSize={14}
+              fontWeight={700}
+              paddingY={1}
+              paddingX={2}
+              color={pathName.includes("admin") ? "#18BA51" : "#000"}
+              onClick={() => {
+                router.push("/admin")
+              }}
+              sx={{ cursor: "pointer" }}
+            >
+              ADMIN
+            </Typography>
 
           </Stack>
           <Stack flexDirection={"row"} gap={1}>
@@ -139,10 +153,10 @@ export const Header = (props: HeaderProps) => {
                   alt="profile logo"
                   width={18}
                   height={18}
-                  src="/svg/Vector.svg"
+                  src={pathName.includes("user") ? "/svg/usergr.svg" : "/svg/Vector.svg"}
                   onClick={handleOpen}
                 />
-                <Typography fontSize={14} fontWeight={700} onClick={() => {
+                <Typography fontSize={14} fontWeight={700} color={pathName.includes("user") ? "#18BA51" : "#000"} onClick={() => {
                   if (userName) {
                     router.push("/user")
                   } else {

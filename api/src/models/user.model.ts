@@ -25,6 +25,9 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  basket: {
+    type: Array,
+  },
   // {timestamps:true}
 });
 

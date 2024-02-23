@@ -14,6 +14,8 @@ type UserContextType = {
     userEmail: string;
     setUserEmail: Dispatch<SetStateAction<string>>;
     userNumber: number;
+    isAdmin: boolean;
+    setIsAdmin: Dispatch<SetStateAction<boolean>>
     setUserNumber: Dispatch<SetStateAction<number>>
     getUser: () => Promise<void | JSX.Element>;
 }
@@ -25,7 +27,8 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const [userName, setUserName] = useState("");
     const [userNumber, setUserNumber] = useState(Number);
     const [userEmail, setUserEmail] = useState("");
-    const [isUpdated, setIsUpdated] = useState(false)
+    const [isUpdated, setIsUpdated] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const getUser = async () => {
 
@@ -38,12 +41,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         })
 
 
-        const { name, email, phoneNumber } = res.data;
+        const { name, email, phoneNumber, role } = res.data;
 
 
         setUserEmail(email);
         setUserName(name);
-        setUserNumber(phoneNumber)
+        setUserNumber(phoneNumber);
+        if (role === "admin") {
+            setIsAdmin(true);
+        }
+
 
     }
 
@@ -53,7 +60,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         }
     }, [isLogged, isUpdated])
 
-    return <UserContext.Provider value={{ userName, setUserName, userNumber, setUserNumber, userEmail, setUserEmail, getUser }}>{children}</UserContext.Provider>
+    return <UserContext.Provider value={{ userName, setUserName, userNumber, setUserNumber, userEmail, setUserEmail, getUser, isAdmin, setIsAdmin }}>{children}</UserContext.Provider>
 }
 
 export const useUser = () => useContext(UserContext);

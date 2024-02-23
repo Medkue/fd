@@ -22,16 +22,19 @@ export const getFoodData: RequestHandler = async (req, res) => {
 //foods.find({category:{$regex:/^ searchValue/, $options:"i"}}) hoyulangiinh ni search deer tom jijig useggui hainaa
 
 export const addFood: RequestHandler = async (req, res) => {
+  const { name, image, price, ingedrients, category, discount } = req.body;
   try {
     await FoodModel.create({
-      name: "hool",
-      image:
-        "https://www.pixelstalk.net/wp-content/uploads/2016/08/Pictures-HD-Food-Download.jpg",
-      price: "55555",
-      category: "snack",
+      name: name,
+      image: image,
+      // "https://www.pixelstalk.net/wp-content/uploads/2016/08/Pictures-HD-Food-Download.jpg",
+      price: price,
+      category: category,
+      ingeredient: ingedrients,
+      discount: discount,
     });
     res.json({
-      message: "kk",
+      message: "Food added into menu successfully",
     });
   } catch (error) {
     console.log(error);
