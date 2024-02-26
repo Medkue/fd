@@ -1,6 +1,6 @@
 "use client"
 
-import { api } from "@/app/common";
+import { api } from "@/common";
 import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthProvider";
 
@@ -13,6 +13,8 @@ type UserContextType = {
     setUserName: Dispatch<SetStateAction<string>>;
     userEmail: string;
     setUserEmail: Dispatch<SetStateAction<string>>;
+    userImg: string;
+    setUserImg: Dispatch<SetStateAction<string>>;
     userNumber: number;
     isAdmin: boolean;
     setIsAdmin: Dispatch<SetStateAction<boolean>>
@@ -27,6 +29,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     const [userName, setUserName] = useState("");
     const [userNumber, setUserNumber] = useState(Number);
     const [userEmail, setUserEmail] = useState("");
+    const [userImg, setUserImg] = useState("")
     const [isUpdated, setIsUpdated] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
@@ -41,12 +44,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         })
 
 
-        const { name, email, phoneNumber, role } = res.data;
+        const { name, email, phoneNumber, role, img } = res.data;
 
 
         setUserEmail(email);
         setUserName(name);
         setUserNumber(phoneNumber);
+        setUserImg(img)
         if (role === "admin") {
             setIsAdmin(true);
         }
@@ -60,7 +64,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         }
     }, [isLogged, isUpdated])
 
-    return <UserContext.Provider value={{ userName, setUserName, userNumber, setUserNumber, userEmail, setUserEmail, getUser, isAdmin, setIsAdmin }}>{children}</UserContext.Provider>
+    return <UserContext.Provider value={{ userName, setUserName, userNumber, setUserNumber, userEmail, setUserEmail, getUser, isAdmin, setIsAdmin, userImg, setUserImg }}>{children}</UserContext.Provider>
 }
 
 export const useUser = () => useContext(UserContext);

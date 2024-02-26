@@ -1,6 +1,6 @@
 "use client"
 
-import { api } from "@/app/common";
+import { api } from "@/common";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";

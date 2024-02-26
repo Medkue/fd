@@ -3,7 +3,7 @@
 import { Container, Stack, Typography } from "@mui/material";
 import { MainDish } from "../../../components/mainPageComps/MainDish";
 import { useParams, usePathname } from 'next/navigation'
-import { useFetch } from "@/app/Hooks/useFetch";
+import { useFetch } from "@/Hooks/useFetch";
 import { FoodCard } from "@/components/cards/FoodCard";
 import { string } from "yup";
 import { useState } from "react";

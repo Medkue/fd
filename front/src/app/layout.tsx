@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Footer, Header } from "@/components";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { theme } from "@/app/theme";
+import { theme } from "@/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import {
   ChangeEvent,

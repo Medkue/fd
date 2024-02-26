@@ -7,7 +7,9 @@ import { useUser } from "@/components/providers/UserProvider";
 import { useAuth } from "@/components/providers/AuthProvider";
 
 export default function Home() {
-    const { userName, userNumber, userEmail } = useUser();
+    const { userName, userNumber, userEmail, userImg } = useUser();
+    console.log(userImg);
+
     const { isLogged } = useAuth();
     const [open, setOpen] = useState(false)
     const toggleModal = () => {
@@ -19,8 +21,9 @@ export default function Home() {
                 <Container sx={{ display: "flex", justifyContent: 'center' }}>
                     <Stack width={432} gap={3} alignItems={"center"}>
                         <Stack position={"relative"} width={120} height={120}>
-                            <Stack width={120} height={120} borderRadius={"100%"} position={"relative"}>
-                                <Image src={"/svg/Photo.svg"} fill alt="user image" />
+                            <Stack width={120} height={120} borderRadius={"100%"} position={"relative"} overflow={"hidden"}>
+                                {userImg ? <Image src={userImg} fill alt="user profile" objectFit="cover" /> :
+                                    <Image src={"/svg/Photo.svg"} fill alt="user image" objectFit="cover" />}
                             </Stack>
                             <Stack width={34} height={34} borderRadius={"100%"} border={"2px solid #D6D8DB"} position={"absolute"} bottom={-2} right={-2} alignItems="center" justifyContent="center" bgcolor="white">
                                 <Image src="/svg/edit.svg" width={24} height={24} alt="user image" />

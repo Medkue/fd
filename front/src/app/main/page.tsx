@@ -5,7 +5,7 @@ import { MonitorSection } from "../../components/mainPageComps/MonitorSection";
 import { OnSale } from "../../components/mainPageComps/OnSale";
 import { MainDish } from "../../components/mainPageComps/MainDish";
 import { Salad } from "../../components/mainPageComps/Salad";
-import { useFetch } from "../Hooks/useFetch";
+import { useFetch } from "../../Hooks/useFetch";
 import { useState } from "react";
 import { Snack } from "../../components/mainPageComps/Snack";
 

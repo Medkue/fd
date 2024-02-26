@@ -3,7 +3,7 @@ import { Button, Container, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { api } from "../app/common";
+import { api } from "../common";
 import { log } from "console";
 import { useAuth } from "./providers/AuthProvider";
 import { CustomInput } from "./customUsage/CustomInput";

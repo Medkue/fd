@@ -4,7 +4,7 @@ import { Button, Container, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import * as yup from "yup";
-import { api } from "../common";
+import { api } from "../../common";
 import { useOtp } from "@/components/providers/OtpProvider";
 
 const validationSchema = yup.object({

@@ -1,6 +1,6 @@
 "use client";
 import { Button, Container, IconButton, Stack, Typography } from "@mui/material"
-import { useFetch } from "../../app/Hooks/useFetch"
+import { useFetch } from "../../Hooks/useFetch"
 import { FoodCard } from "../cards/FoodCard"
 import Image from "next/image"
 import { MouseEventHandler, useState } from "react"

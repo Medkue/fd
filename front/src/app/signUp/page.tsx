@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import { CloudOff, CloudQueue } from "@mui/icons-material";
 import { useState } from "react";
-import { api } from "../common";
+import { api } from "../../common";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import YupPassword from "yup-password";

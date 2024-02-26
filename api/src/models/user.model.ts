@@ -28,6 +28,10 @@ const UserSchema = new Schema({
   basket: {
     type: Array,
   },
+  otp: {
+    type: String,
+    required: false,
+  },
   // {timestamps:true}
 });
 
