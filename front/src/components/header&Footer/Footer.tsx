@@ -17,22 +17,22 @@ export const Footer = () => {
                             <Typography fontSize={20} fontWeight={700} color={"white"}>Food Delivery</Typography>
                         </Stack>
                         <Stack flexDirection={"row"} width={"100%"} justifyContent={"space-evenly"}>
-                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white" }}>
+                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white", cursor: "grab" }}>
                                 Нүүр
                             </Link >
-                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white" }}>
+                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white", cursor: "pointer" }}>
                                 Холбоо барих
                             </Link >
-                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white" }}>
+                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white", cursor: "pointer" }}>
                                 Хоолны цэс
                             </Link >
-                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white" }}>
+                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white", cursor: "pointer" }}>
                                 Үйлчилгээний нөхцөл
                             </Link >
-                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white" }}>
+                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white", cursor: "pointer" }}>
                                 Хүргэлтийн бүс
                             </Link >
-                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white" }}>
+                            <Link href={""} color="#nnn" sx={{ fontSize: "16px", fontWeight: "590px", color: "white", textDecorationColor: "white", cursor: "pointer" }}>
                                 Нууцлалын бодлого
                             </Link >
                         </Stack>

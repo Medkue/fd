@@ -1,15 +1,37 @@
+"use client";
 import { Button, Modal, Stack, Typography } from "@mui/material"
 import Image from "next/image";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useOrder } from "../providers/OrderProvider";
+
 type OrderModalProps = {
     toggleModal: () => void;
     open: boolean;
     svg: string;
-    title: any;
-    price: any;
-    ingedrients: any;
+    title: string;
+    price: number;
+    ingedrients: string;
+    // basketOrder: Basket[];
+    // setBasketOrder: Dispatch<SetStateAction<Basket[]>>
 }
+
 export const OrderModal = (props: OrderModalProps) => {
     const { toggleModal, open, svg, title, price, ingedrients } = props;
+    const { basketOrder, setBasketOrder, count, setCount } = useOrder();
+
+    // const setOrder = () => {
+    //     setBasketOrder([
+    //         ...basketOrder, {
+    //             img: svg,
+    //             name: title,
+    //             price: price,
+    //             ingedrients: ingedrients,
+    //             count: count,
+    //         }
+    //     ])
+
+    //     localStorage.setItem("basket", basketOrder);
+    // }
 
     return (
         <Modal open={open} onClose={toggleModal} disableEnforceFocus>
@@ -23,17 +45,31 @@ export const OrderModal = (props: OrderModalProps) => {
                         <Typography fontSize={18} fontWeight={600} color={"#18BA51"}>{price}$</Typography>
                         <Typography color={"#767676"}>{ingedrients}</Typography>
                         <Stack direction={"row"} justifyContent={"center"}>
-                            <Stack width={45} height={40} bgcolor={"#18BA51"} borderRadius={"10px"} justifyContent={"center"} alignItems={"center"}>
+                            <Stack width={45} height={40} bgcolor={"#18BA51"} borderRadius={"10px"} justifyContent={"center"} alignItems={"center"} onClick={() => {
+                                if (count > 0) setCount((prev) => prev - 1);
+                            }}>
                                 <Image src={"/svg/minus.svg"} width={13} height={13} alt="minus logo" />
                             </Stack>
                             <Stack width={45} height={40} borderRadius={"10px"} justifyContent={"center"} alignItems={"center"}>
-                                <Typography fontSize={16} fontWeight={500}> 1 </Typography>
+                                <Typography fontSize={16} fontWeight={500}> {count} </Typography>
                             </Stack>
-                            <Stack width={45} height={40} bgcolor={"#18BA51"} borderRadius={"10px"} justifyContent={"center"} alignItems={"center"}>
-                                <Image src={"/svg/plus.svg"} width={13} height={13} alt="minus logo" />
+                            <Stack width={45} height={40} bgcolor={"#18BA51"} borderRadius={"10px"} justifyContent={"center"} alignItems={"center"} onClick={() => {
+                                setCount((prev) => prev + 1)
+                            }}>
+                                <Image src={"/svg/plus.svg"} width={13} height={13} alt="plus logo" />
                             </Stack>
                         </Stack>
-                        <Button variant="contained">Сагслах</Button>
+                        <Button variant="contained" onClick={() => {
+                            setBasketOrder([
+                                ...basketOrder, {
+                                    img: svg,
+                                    name: title,
+                                    price: price,
+                                    ingedrients: ingedrients,
+                                    count: count,
+                                }
+                            ])
+                        }}>Сагслах</Button>
                     </Stack>
                 </Stack>
             </Stack >

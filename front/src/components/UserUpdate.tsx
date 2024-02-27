@@ -5,9 +5,10 @@ import { LogOutModal } from "@/components/modals/LogOutModal";
 import { useState } from "react";
 import { useUser } from "@/components/providers/UserProvider";
 import { useAuth } from "@/components/providers/AuthProvider";
+import { UploadModal } from "./modals/UploadModal";
 
 
-export default function Home() {
+export const UserUpdate = () => {
     const { userName, userNumber, userEmail, userImg } = useUser();
 
     const { isLogged } = useAuth();
@@ -25,9 +26,10 @@ export default function Home() {
                                 {userImg ? <Image src={userImg} fill alt="user profile" objectFit="cover" /> :
                                     <Image src={"/svg/Photo.svg"} fill alt="user image" objectFit="cover" />}
                             </Stack>
-                            <Stack width={34} height={34} borderRadius={"100%"} border={"2px solid #D6D8DB"} position={"absolute"} bottom={-2} right={-2} alignItems="center" justifyContent="center" bgcolor="white">
+                            <Stack width={34} height={34} borderRadius={"100%"} border={"2px solid #D6D8DB"} position={"absolute"} bottom={-2} right={-2} alignItems="center" justifyContent="center" bgcolor="white" onClick={toggleModal}>
                                 <Image src="/svg/edit.svg" width={24} height={24} alt="user image" />
                             </Stack>
+                            <UploadModal open={open} toggleModal={toggleModal} />
                         </Stack>
                         <Typography fontSize={28} fontWeight={700}>
                             {userName}
@@ -69,25 +71,7 @@ export default function Home() {
                                 </Stack>
                                 <Image src="/svg/edit.svg" width={24} height={24} alt="edit logo" />
                             </Stack>
-                            <Stack direction="row" width={392} height={64} px={"20px"} py={1} justifyContent="space-between" borderRadius="4px" alignItems={"center"}>
-                                <Stack direction={"row"} gap={2} alignItems={"center"}>
-                                    <Stack width={48} height={48} borderRadius={"100%"} alignItems="center" justifyContent="center" bgcolor="white" border="1px solid #F6F6F6">
-                                        <Image src="/svg/history.svg" width={24} height={24} alt="user image" />
-                                    </Stack>
-                                    <Typography>Захиалгын түүх</Typography>
-                                </Stack>
-                            </Stack>
-                            <Stack direction="row" width={392} height={64} px={"20px"} py={1} borderRadius="4px" alignItems={"center"} onClick={toggleModal}>
-                                <Stack direction={"row"} gap={2} alignItems={"center"} >
-                                    <Stack width={48} height={48} borderRadius={"100%"} alignItems="center" justifyContent="center" bgcolor="white" border="1px solid #F6F6F6">
-                                        <Image src="/svg/logout.svg" width={24} height={24} alt="user image" />
-                                    </Stack>
-                                    <Typography>Гарах</Typography>
-                                    <LogOutModal open={open} toggleModal={toggleModal} />
-                                </Stack>
-                            </Stack>
                         </Stack>
-
                     </Stack>
                 </Container>
 

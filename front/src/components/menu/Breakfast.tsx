@@ -29,7 +29,9 @@ export const Breakfast = (props: BreakfastProps) => {
                     <Stack sx={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }} gap={3} >
                         {data?.map((item: any, index) => {
                             return (<Stack key={index} >
-                                <FoodCard svg={item.image} title={item.name} price={item.price} discount={item.discount} onclick={toggleModal} />
+                                <FoodCard svg={item.image} title={item.name} price={item.price} discount={item.discount} onclick={() => {
+                                    toggleModal
+                                }} />
                                 <OrderModal svg={item.image} title={item.name} price={item.price} ingedrients={item.ingedrient} toggleModal={toggleModal} open={open} />
                             </Stack>
                             )

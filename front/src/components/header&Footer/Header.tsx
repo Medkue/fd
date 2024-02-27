@@ -33,7 +33,7 @@ export const Header = (props: HeaderProps) => {
   const toggleDrawer = () => {
     setState((prev) => !prev);
   }
-  console.log(userName);
+
 
 
   return (
