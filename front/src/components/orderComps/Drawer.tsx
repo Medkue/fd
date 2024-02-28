@@ -22,7 +22,7 @@ export const Drawer = (props: DrawerProps) => {
                     <Stack></Stack>
                 </Stack>
                 <Stack height={"90%"} overflow={"scroll"} >{basketOrder && basketOrder.map((item, index) => {
-                    return (<BasketOrder key={index} name={item.name} price={item.price} ingedrients={item.ingedrients} image={item.img} count={item.count} setCount={setCount} />)
+                    return (<BasketOrder key={index} name={item.name} price={item.price} ingedrients={item.ingedrients} image={item.img} count={item.count} id={item.id} setCount={setCount} />)
                 })}
 
                 </Stack>

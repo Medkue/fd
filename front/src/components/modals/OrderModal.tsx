@@ -11,12 +11,13 @@ type OrderModalProps = {
     title: string;
     price: number;
     ingedrients: string;
+    id: string;
     // basketOrder: Basket[];
     // setBasketOrder: Dispatch<SetStateAction<Basket[]>>
 }
 
 export const OrderModal = (props: OrderModalProps) => {
-    const { toggleModal, open, svg, title, price, ingedrients } = props;
+    const { toggleModal, open, svg, title, price, ingedrients, id } = props;
     const { basketOrder, setBasketOrder, count, setCount } = useOrder();
 
     // const setOrder = () => {
@@ -60,19 +61,34 @@ export const OrderModal = (props: OrderModalProps) => {
                             </Stack>
                         </Stack>
                         <Button variant="contained" onClick={() => {
-                            setBasketOrder([
-                                ...basketOrder, {
-                                    img: svg,
-                                    name: title,
-                                    price: price,
-                                    ingedrients: ingedrients,
-                                    count: count,
+                            let contained = false;
+                            const updatedBasket = [...basketOrder].map((item) => {
+                                if (item.id === id) {
+                                    item.count += count
+                                    contained = true;
                                 }
-                            ])
+                                return item;
+                            })
+                            if (contained === false) {
+                                setBasketOrder([
+                                    ...basketOrder, {
+                                        img: svg,
+                                        name: title,
+                                        price: price,
+                                        ingedrients: ingedrients,
+                                        count: count,
+                                        id: id
+                                    }
+                                ])
+                            } else {
+                                setBasketOrder(updatedBasket)
+                            }
+
+
                         }}>Сагслах</Button>
                     </Stack>
                 </Stack>
             </Stack >
-        </Modal>
+        </Modal >
     )
 }

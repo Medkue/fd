@@ -18,6 +18,7 @@ export const Salad = () => {
         setOpen((prev) => !prev)
     }
 
+
     return (
         <Stack>
             <Container>
@@ -43,7 +44,7 @@ export const Salad = () => {
                         {data?.map((item: any, index) => {
                             if (index <= 3) return (<Stack key={index} >
                                 <FoodCard svg={item.image} title={item.name} price={item.price} discount={item.discount} onclick={toggleModal} />
-                                <OrderModal svg={item.image} title={item.name} price={item.price} ingedrients={item.ingedrient} toggleModal={toggleModal} open={open} />
+                                <OrderModal svg={item.image} title={item.name} price={item.price} ingedrients={item.ingedrient} id={item._id} toggleModal={toggleModal} open={open} />
                             </Stack>
                             )
                         })}

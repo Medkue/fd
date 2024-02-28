@@ -13,6 +13,7 @@ type Basket = {
     price: number,
     ingedrients: string,
     count: number,
+    id: string,
 }
 
 

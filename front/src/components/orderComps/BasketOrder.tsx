@@ -10,11 +10,12 @@ type BasketOrderProps = {
     price: number;
     ingedrients: string;
     count: number;
+    id: string;
     setCount: Dispatch<SetStateAction<number>>;
 };
 
 export const BasketOrder = (props: BasketOrderProps) => {
-    const { image, name, price, ingedrients, count, setCount } = props;
+    const { image, name, price, ingedrients, count, setCount, id } = props;
     const { basketOrder, setBasketOrder } = useOrder();
 
     return (
@@ -38,7 +39,7 @@ export const BasketOrder = (props: BasketOrderProps) => {
                             />
                         </Stack>
                         <Image src={"/svg/close.svg"} width={14} height={14} alt="close button" onClick={() => {
-                            const updatedBasket = basketOrder.filter((item) => item.name !== name)
+                            const updatedBasket = basketOrder.filter((item) => item.id !== id)
                             setBasketOrder(updatedBasket);
 
                         }} />
