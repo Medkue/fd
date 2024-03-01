@@ -2,7 +2,7 @@
 import { Button, Modal, Stack, Typography } from "@mui/material"
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
-import { useOrder } from "../providers/OrderProvider";
+import { useBasket } from "../providers/BasketProvider";
 
 type OrderModalProps = {
     toggleModal: () => void;
@@ -18,7 +18,7 @@ type OrderModalProps = {
 
 export const OrderModal = (props: OrderModalProps) => {
     const { toggleModal, open, svg, title, price, ingedrients, id } = props;
-    const { basketOrder, setBasketOrder, count, setCount } = useOrder();
+    const { basketOrder, setBasketOrder, count, setCount } = useBasket();
 
     // const setOrder = () => {
     //     setBasketOrder([

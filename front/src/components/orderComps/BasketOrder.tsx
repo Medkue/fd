@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import { number } from "yup";
-import { useOrder } from "../providers/OrderProvider";
+import { useBasket } from "../providers/BasketProvider";
 type BasketOrderProps = {
     image: string;
     name: string;
@@ -12,11 +12,12 @@ type BasketOrderProps = {
     count: number;
     id: string;
     setCount: Dispatch<SetStateAction<number>>;
+    isOrder: boolean;
 };
 
 export const BasketOrder = (props: BasketOrderProps) => {
-    const { image, name, price, ingedrients, count, setCount, id } = props;
-    const { basketOrder, setBasketOrder } = useOrder();
+    const { image, name, price, ingedrients, count, setCount, id, isOrder } = props;
+    const { basketOrder, setBasketOrder } = useBasket();
 
     return (
         <Stack width={"100%"} p={3} gap={2}>
@@ -48,6 +49,7 @@ export const BasketOrder = (props: BasketOrderProps) => {
                     <Typography color={"#767676"}>{ingedrients}</Typography>
                     <Stack direction={"row"}>
                         <Stack
+                            display={isOrder ? "none" : "flex"}
                             width={45}
                             height={40}
                             bgcolor={"#18BA51"}
@@ -71,13 +73,17 @@ export const BasketOrder = (props: BasketOrderProps) => {
                             borderRadius={"10px"}
                             justifyContent={"center"}
                             alignItems={"center"}
+                            direction={"row"}
+                            gap={2}
                         >
-                            <Typography fontSize={16} fontWeight={500}>
+                            <Typography ml={3} display={isOrder ? "flex" : "none"} fontSize={20} fontWeight={700}>x</Typography>
+                            <Typography fontSize={isOrder ? 20 : 16} fontWeight={isOrder ? 700 : 500}>
                                 {" "}
                                 {count}
                             </Typography>
                         </Stack>
                         <Stack
+                            display={isOrder ? "none" : "flex"}
                             width={45}
                             height={40}
                             bgcolor={"#18BA51"}

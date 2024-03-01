@@ -22,7 +22,7 @@ export const CustomSelect = (props: CustomSelectType) => {
                 </Stack>
                 <Image src={"/svg/arrow_forward_ios.svg"} width={24} height={24} alt="see selection icon" />
             </Stack>
-            <Stack>
+            <Stack oncli >
                 {selections.map((item) => {
                     return <Stack direction={"row"}>
                         <Image src={"/svg/location.svg"} width={24} height={24} alt="location icon" />

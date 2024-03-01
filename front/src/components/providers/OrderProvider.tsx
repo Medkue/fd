@@ -1,64 +1,72 @@
 "use client";
 
-import React, { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
+import { api } from "@/common";
+import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
+import { Basket } from "./BasketProvider";
 
+type OrderContextType = {
+    district: string; setDistrict: Dispatch<SetStateAction<string>>;
+    khoroo: string; setKhoroo: Dispatch<SetStateAction<string>>;
+    apartment: string; setApartment: Dispatch<SetStateAction<string>>;
+    detailedInfo: string; setDetailedInfo: Dispatch<SetStateAction<string>>;
+    phoneNumber: string; setPhoneNumber: Dispatch<SetStateAction<string>>;
+    paymentMethod: string; setPaymentMethod: Dispatch<SetStateAction<string>>;
+    send: (params: SendType) => Promise<void>;
+}
+
+type foodArray = {
+
+}
+
+type SendType = {
+    district: string;
+    khoroo: string;
+    apartment: string;
+    detailedInfo: string;
+    phoneNumber: string;
+    paymentMethod: string;
+    basket: Basket[];
+}
 
 type OrderProviderType = {
     children: React.ReactNode;
 }
 
-type Basket = {
-    img: string,
-    name: string,
-    price: number,
-    ingedrients: string,
-    count: number,
-    id: string,
-}
-
-
-type OrderContextType = {
-    basketOrder: Basket[];
-    setBasketOrder: Dispatch<SetStateAction<Basket[]>>;
-    count: number;
-    setCount: Dispatch<SetStateAction<number>>;
-    totalCost: () => void;
-    basketTotal: number;
-}
-
-const OrderContex = createContext<OrderContextType>({} as OrderContextType)
+const OrderContext = createContext<OrderContextType>({} as OrderContextType);
 
 export const OrderProvider = ({ children }: OrderProviderType) => {
-    const [basketOrder, setBasketOrder] = useState<Basket[]>([]);
-    const [iseFirstRender, setIsFirstRender] = useState(true);
-    const [count, setCount] = useState(1);
-    const [basketTotal, setBasketTotal] = useState(0);
+    const [district, setDistrict] = useState("");
+    const [khoroo, setKhoroo] = useState("");
+    const [apartment, setApartment] = useState("");
+    const [detailedInfo, setDetailedInfo] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState("Бэлнээр");
 
-    const totalCost = () => {
-        basketOrder.map((item) => {
-            setBasketTotal((prev) => prev + item.price * item.count)
-        })
+    const send = async (params: SendType) => {
+        try {
+            const res = await api.post("food/order", {
+                district: params.district,
+                khoroo: params.khoroo,
+                apartment: params.apartment,
+                detailedInfo: params.detailedInfo,
+                phoneNumber: params.phoneNumber,
+                paymentMethod: params.paymentMethod,
+                basket: params.basket,
+            })
+
+            console.log(res.data.message, "res");
+
+
+        } catch (error) {
+
+        }
     }
 
-    useEffect(() => {
-        const basket = localStorage.getItem("basket");
 
-        if (basket) { setBasketOrder(JSON.parse(basket)) }
 
-        setIsFirstRender(false)
-    }, [])
+    return (<OrderContext.Provider value={{ district, setDistrict, khoroo, setKhoroo, apartment, setApartment, detailedInfo, setDetailedInfo, phoneNumber, setPhoneNumber, paymentMethod, setPaymentMethod, send }}>{children}</OrderContext.Provider>)
 
-    useEffect(() => {
-        if (iseFirstRender) return;
-
-        localStorage.setItem("basket", JSON.stringify(basketOrder));
-
-        totalCost();
-
-    }, [basketOrder])
-
-    return <OrderContex.Provider value={{ basketOrder, setBasketOrder, count, setCount, totalCost, basketTotal }}>{children}</OrderContex.Provider>
 
 }
 
-export const useOrder = () => useContext(OrderContex);
+export const useOrder = () => useContext(OrderContext);

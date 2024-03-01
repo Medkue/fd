@@ -1,16 +1,19 @@
+"use client"
 import { Button, Stack, SwipeableDrawer, Typography } from "@mui/material"
 import Image from "next/image";
 import { BasketOrder } from "./BasketOrder";
-import { useOrder } from "../providers/OrderProvider";
+import { useBasket } from "../providers/BasketProvider";
 import { NumericFormat } from 'react-number-format';
+import { useRouter } from "next/navigation";
 
 type DrawerProps = {
-    state: boolean;
+    state?: boolean;
     toggleDrawer: () => void
 }
 export const Drawer = (props: DrawerProps) => {
     const { state, toggleDrawer } = props;
-    const { basketOrder, setCount, basketTotal } = useOrder();
+    const { basketOrder, setCount, basketTotal } = useBasket();
+    const router = useRouter();
 
 
     return (
@@ -22,7 +25,7 @@ export const Drawer = (props: DrawerProps) => {
                     <Stack></Stack>
                 </Stack>
                 <Stack height={"90%"} overflow={"scroll"} >{basketOrder && basketOrder.map((item, index) => {
-                    return (<BasketOrder key={index} name={item.name} price={item.price} ingedrients={item.ingedrients} image={item.img} count={item.count} id={item.id} setCount={setCount} />)
+                    return (<BasketOrder key={index} name={item.name} price={item.price} ingedrients={item.ingedrients} image={item.img} count={item.count} id={item.id} setCount={setCount} isOrder={false} />)
                 })}
 
                 </Stack>
@@ -37,7 +40,10 @@ export const Drawer = (props: DrawerProps) => {
                             renderText={(value) => <b>{value}</b>}
                         />
                     </Stack>
-                    <Button variant="contained" sx={{ flex: 1, flexBasis: 0, height: '48px' }}>Захиалах</Button>
+                    <Button variant="contained" sx={{ flex: 1, flexBasis: 0, height: '48px' }} onClick={() => {
+                        router.push("order")
+                        toggleDrawer();
+                    }}>Захиалах</Button>
                 </Stack>
             </Stack>
         </SwipeableDrawer>

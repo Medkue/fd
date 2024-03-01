@@ -22,6 +22,9 @@ export const Breakfast = (props: BreakfastProps) => {
         setOpen((prev) => !prev)
     }
 
+    console.log(data, "data");
+
+
     return (
         <Stack display={isShown ? "flex" : "none"}>
             <Container>
@@ -32,7 +35,7 @@ export const Breakfast = (props: BreakfastProps) => {
                                 <FoodCard svg={item.image} title={item.name} price={item.price} discount={item.discount} onclick={() => {
                                     toggleModal
                                 }} />
-                                <OrderModal svg={item.image} title={item.name} price={item.price} ingedrients={item.ingedrient} toggleModal={toggleModal} open={open} />
+                                <OrderModal svg={item.image} title={item.name} price={item.price} ingedrients={item.ingedrient} toggleModal={toggleModal} open={open} id={item._id} />
                             </Stack>
                             )
                         })}

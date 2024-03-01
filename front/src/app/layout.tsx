@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { OtpProvider } from "@/components/providers/OtpProvider";
 import { UserProvider } from "@/components/providers/UserProvider";
+import { BasketProvider } from "@/components/providers/BasketProvider";
 import { OrderProvider } from "@/components/providers/OrderProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -46,13 +47,15 @@ export default function RootLayout({
 
             <AuthProvider>
               <OrderProvider>
-                <OtpProvider>
-                  <UserProvider>
-                    <Header />
-                    {children}
-                    <Footer />
-                  </UserProvider>
-                </OtpProvider>
+                <BasketProvider>
+                  <OtpProvider>
+                    <UserProvider>
+                      <Header />
+                      {children}
+                      <Footer />
+                    </UserProvider>
+                  </OtpProvider>
+                </BasketProvider>
               </OrderProvider>
             </AuthProvider>
 
