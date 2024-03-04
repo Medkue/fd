@@ -9,12 +9,9 @@ export const getUser: RequestHandler = async (req, res) => {
     throw new Error("");
   }
 
-  const { email: userEmail } = Jwt.verify(
-    authorization,
-    "secret-key"
-  ) as JwtPayload;
+  const { userId } = Jwt.verify(authorization, "secret-key") as JwtPayload;
 
-  const user = await UserModel.findOne({ email: userEmail });
+  const user = await UserModel.findOne({ _id: userId });
 
   if (!user)
     return res.json({

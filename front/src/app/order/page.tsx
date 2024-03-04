@@ -7,6 +7,7 @@ import { PlaceOutlined } from "@mui/icons-material";
 import { Button, Checkbox, Container, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import { NumericFormat } from "react-number-format";
+import { string } from "yup";
 
 
 const districts = [
@@ -45,7 +46,7 @@ export default function Home() {
     // const [detailedInfo, setDetailedInfo] = useState('');
     // const [phoneNumber, setPhoneNumber] = useState("")
 
-    const { district, setDistrict, khoroo, setKhoroo, apartment, setApartment, detailedInfo, setDetailedInfo, phoneNumber, setPhoneNumber, paymentMethod, setPaymentMethod, send } = useOrder();
+    const { district, setDistrict, khoroo, setKhoroo, apartment, setApartment, detailedInfo, setDetailedInfo, phoneNumber, setPhoneNumber, paymentMethod, setPaymentMethod, process, send } = useOrder();
     const isValid = district && khoroo && apartment && phoneNumber && detailedInfo
 
     return (
@@ -152,7 +153,7 @@ export default function Home() {
                                         />
                                     </Stack>
                                     <Button variant="contained" sx={{ flex: 1, flexBasis: 0, height: '48px' }} disabled={!isValid || !basketTotal} onClick={() => {
-                                        send({ district, khoroo, apartment, detailedInfo, phoneNumber, paymentMethod, basket: basketOrder })
+                                        send({ district, khoroo, apartment, detailedInfo, phoneNumber, paymentMethod, basket: basketOrder, totalPrice: basketTotal, process: process })
                                     }}>Захиалах</Button>
                                 </Stack>
                             </Stack>

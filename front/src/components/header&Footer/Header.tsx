@@ -24,6 +24,8 @@ export const Header = (props: HeaderProps) => {
   const [state, setState] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+
   const searchOnChangeHandler = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -157,11 +159,7 @@ export const Header = (props: HeaderProps) => {
                   onClick={handleOpen}
                 />
                 <Typography fontSize={14} fontWeight={700} color={pathName.includes("user") ? "#18BA51" : "#000"} onClick={() => {
-                  if (userName) {
-                    router.push("/user")
-                  } else {
-                    handleOpen()
-                  }
+                  { userName ? router.push("/user") : handleOpen() }
                 }} sx={{ cursor: "pointer" }}>
                   {isLogged ? userName : "Нэвтрэх"}
                 </Typography>

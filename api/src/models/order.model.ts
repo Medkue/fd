@@ -14,16 +14,16 @@ const OrderSchema = new Schema({
     required: true,
   },
   totalPrice: {
-    type: Number,
-    required: true,
+    type: String,
+    required: false,
   },
   process: {
     type: String,
-    required: true,
+    required: false,
   },
   createdAt: {
     type: Date,
-    required: true,
+    required: false,
   },
   district: {
     type: String,

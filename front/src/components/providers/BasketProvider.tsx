@@ -23,7 +23,7 @@ type BasketContextType = {
     count: number;
     setCount: Dispatch<SetStateAction<number>>;
     totalCost: () => void;
-    basketTotal: number;
+    basketTotal: string;
 }
 
 const BasketContext = createContext<BasketContextType>({} as BasketContextType)
@@ -32,7 +32,7 @@ export const BasketProvider = ({ children }: BasketProviderType) => {
     const [basketOrder, setBasketOrder] = useState<Basket[]>([]);
     const [iseFirstRender, setIsFirstRender] = useState(true);
     const [count, setCount] = useState(1);
-    const [basketTotal, setBasketTotal] = useState(0);
+    const [basketTotal, setBasketTotal] = useState("");
 
     const totalCost = () => {
         let total = 0;
@@ -40,7 +40,7 @@ export const BasketProvider = ({ children }: BasketProviderType) => {
             total += item.price * item.count
         })
 
-        setBasketTotal(total);
+        setBasketTotal(total.toString());
     }
 
     useEffect(() => {

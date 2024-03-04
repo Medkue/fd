@@ -5,6 +5,7 @@ import { LogOutModal } from "@/components/modals/LogOutModal";
 import { useState } from "react";
 import { useUser } from "@/components/providers/UserProvider";
 import { useAuth } from "@/components/providers/AuthProvider";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -71,10 +72,15 @@ export default function Home() {
                             </Stack>
                             <Stack direction="row" width={392} height={64} px={"20px"} py={1} justifyContent="space-between" borderRadius="4px" alignItems={"center"}>
                                 <Stack direction={"row"} gap={2} alignItems={"center"}>
+
                                     <Stack width={48} height={48} borderRadius={"100%"} alignItems="center" justifyContent="center" bgcolor="white" border="1px solid #F6F6F6">
                                         <Image src="/svg/history.svg" width={24} height={24} alt="user image" />
                                     </Stack>
-                                    <Typography>Захиалгын түүх</Typography>
+
+                                    <Link href="/order-history" style={{ textDecoration: "none", color: "black" }}>
+                                        <Typography >Захиалгын түүх</Typography>
+                                    </Link>
+
                                 </Stack>
                             </Stack>
                             <Stack direction="row" width={392} height={64} px={"20px"} py={1} borderRadius="4px" alignItems={"center"} onClick={toggleModal}>
@@ -89,9 +95,10 @@ export default function Home() {
                         </Stack>
 
                     </Stack>
-                </Container>
+                </Container >
 
-            </Stack>)}
+            </Stack >)
+        }
     </>
     )
 }

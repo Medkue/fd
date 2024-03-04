@@ -48,7 +48,12 @@ export const logIn: RequestHandler = async (req, res) => {
       message: "Wrong Password",
     });
   }
-  const token = Jwt.sign({ email }, "secret-key");
+
+  const userId = user._id;
+
+  console.log(userId, user._id);
+
+  const token = Jwt.sign({ userId }, "secret-key");
 
   res.json({ token });
 };
